@@ -1,18 +1,29 @@
-import {Entity, PrimaryGeneratedColumn, Column} from "typeorm";
+import {Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToOne, JoinColumn} from "typeorm";
 
-@Entity()
+@Entity({name: "users"})
 export class User {
 
     @PrimaryGeneratedColumn()
     id: number;
 
     @Column()
-    firstName: string;
+    badge_id: number;
 
     @Column()
-    lastName: string;
+    nt_name: string;
 
     @Column()
-    age: number;
+    email: string;
 
+    @Column()
+    joined_date: string;
+
+    @Column()
+    team_id: number;
+
+    @Column()
+    manager_id: number;
+
+    @Column()
+    user_role: string;
 }
