@@ -1,4 +1,6 @@
 import {Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToOne, JoinColumn} from "typeorm";
+import { Team } from "./Team";
+import { UserChecklist } from "./UserChecklist";
 
 @Entity({name: "users"})
 export class User {
@@ -6,7 +8,7 @@ export class User {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column()
+    @Column({ unique: true })
     badge_id: number;
 
     @Column()
@@ -15,15 +17,19 @@ export class User {
     @Column()
     email: string;
 
-    @Column()
+    @Column({ nullable: true })
     joined_date: string;
 
-    @Column()
-    team_id: number;
+    @ManyToOne(type => Team, team => team.users)
+    @JoinColumn({name: "team_id"})
+    team: Team
 
-    @Column()
+    @Column({ nullable: true })
     manager_id: number;
 
-    @Column()
+    @Column({ nullable: false })
     user_role: string;
+
+    @OneToMany(type => UserChecklist, userChecklist => userChecklist.user)
+    userChecklists: UserChecklist[]
 }
