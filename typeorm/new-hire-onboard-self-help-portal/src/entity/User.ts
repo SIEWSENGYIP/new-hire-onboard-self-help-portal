@@ -30,6 +30,9 @@ export class User {
     @Column({ nullable: false })
     user_role: string;
 
+    @Column()
+    status: string;
+
     @OneToMany(type => UserChecklist, userChecklist => userChecklist.user)
     userChecklists: UserChecklist[]
 }

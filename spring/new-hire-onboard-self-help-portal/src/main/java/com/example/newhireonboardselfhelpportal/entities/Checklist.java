@@ -41,7 +41,7 @@ public class Checklist {
     private String reference_doc;
 
     @JsonManagedReference
-    @OneToMany(mappedBy = "checklists")
+    @OneToMany(mappedBy = "checklist")
     private Set<UserChecklist> userChecklists;
 
     @JsonBackReference

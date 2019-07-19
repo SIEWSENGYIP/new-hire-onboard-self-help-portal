@@ -47,7 +47,7 @@ public class User {
     private String userRole;
 
     @JsonManagedReference
-    @OneToMany(mappedBy = "users")
+    @OneToMany(mappedBy = "user")
     private Set<UserChecklist> userChecklists;
 
     public Long getId() {
