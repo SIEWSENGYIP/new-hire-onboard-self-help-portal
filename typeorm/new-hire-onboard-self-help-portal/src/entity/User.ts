@@ -1,6 +1,6 @@
 import {Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToOne, JoinColumn} from "typeorm";
 import { Team } from "./Team";
-import { UserChecklist } from "./UserChecklist";
+import { UserTodo } from "./UserTodo";
 
 @Entity({name: "users"})
 export class User {
@@ -30,9 +30,9 @@ export class User {
     @Column({ nullable: false })
     user_role: string;
 
-    @Column()
+    @Column({ nullable: true })
     status: string;
 
-    @OneToMany(type => UserChecklist, userChecklist => userChecklist.user)
-    userChecklists: UserChecklist[]
+    @OneToMany(type => UserTodo, userTodo => userTodo.user)
+    userTodos: UserTodo[]
 }

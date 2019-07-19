@@ -1,18 +1,18 @@
 import {Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn} from "typeorm";
-import { Checklist } from "./Checklist";
+import { Todo } from "./Todo";
 import { User } from "./User";
 
-@Entity({name: "user_checklists"})
-export class UserChecklist {
+@Entity({name: "user_todos"})
+export class UserTodo {
 
     @PrimaryGeneratedColumn()
     id: number;
 
-    @ManyToOne(type => Checklist, checklist => checklist.userChecklists)
-    @JoinColumn({name: "checklist_id"})
-    checklist: Checklist
+    @ManyToOne(type => Todo, todo => todo.userTodos)
+    @JoinColumn({name: "todo_id"})
+    todo: Todo
 
-    @ManyToOne(type => User, user => user.userChecklists)
+    @ManyToOne(type => User, user => user.userTodos)
     @JoinColumn({name: "user_id"})
     user: User
 
