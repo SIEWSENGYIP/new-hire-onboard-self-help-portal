@@ -48,7 +48,8 @@ public class User {
 
     @JsonManagedReference
     @OneToMany(mappedBy = "user")
-    private Set<UserChecklist> userChecklists;
+    private Set<UserTodo> userTodos;
+
 
     public Long getId() {
         return this.id;
@@ -114,12 +115,13 @@ public class User {
         this.userRole = userRole;
     }
 
-    public Set<UserChecklist> getUserChecklists() {
-        return this.userChecklists;
+    public Set<UserTodo> getUserTodos() {
+        return this.userTodos;
     }
 
-    public void setUserChecklists(Set<UserChecklist> userChecklists) {
-        this.userChecklists = userChecklists;
+    public void setUserTodos(Set<UserTodo> userTodos) {
+        this.userTodos = userTodos;
     }
+    
 
 }

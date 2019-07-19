@@ -14,13 +14,17 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 /**
- * Checklist
+ * Todo
  */
-@Entity(name = "checklists")
-public class Checklist {
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,
+      property = "id")
+@Entity(name = "todos")
+public class Todo {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
@@ -41,17 +45,18 @@ public class Checklist {
     private String reference_doc;
 
     @JsonManagedReference
-    @OneToMany(mappedBy = "checklist")
-    private Set<UserChecklist> userChecklists;
+    @OneToMany(mappedBy = "todo")
+    private Set<UserTodo> userTodos;
 
     @JsonBackReference
     @ManyToMany(cascade=CascadeType.ALL)
     @JoinTable(
-        name="team_checklists", 
-        joinColumns={@JoinColumn(name="checklist_id")}, 
+        name="team_todos", 
+        joinColumns={@JoinColumn(name="todo_id")}, 
         inverseJoinColumns={@JoinColumn(name="team_id")}
     )
     private Set<Team> teams;
+
 
     public Long getId() {
         return this.id;
@@ -101,12 +106,12 @@ public class Checklist {
         this.reference_doc = reference_doc;
     }
 
-    public Set<UserChecklist> getUserChecklists() {
-        return this.userChecklists;
+    public Set<UserTodo> getUserTodos() {
+        return this.userTodos;
     }
 
-    public void setUserChecklists(Set<UserChecklist> userChecklists) {
-        this.userChecklists = userChecklists;
+    public void setUserTodos(Set<UserTodo> userTodos) {
+        this.userTodos = userTodos;
     }
 
     public Set<Team> getTeams() {
@@ -116,5 +121,6 @@ public class Checklist {
     public void setTeams(Set<Team> teams) {
         this.teams = teams;
     }
+
 
 }

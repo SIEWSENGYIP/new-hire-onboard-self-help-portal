@@ -30,7 +30,8 @@ public class Team {
 
     @JsonManagedReference
     @ManyToMany(mappedBy = "teams")
-    private Set<Checklist> checklists;
+    private Set<Todo> todos;
+
 
 
     public Long getId() {
@@ -57,12 +58,13 @@ public class Team {
         this.users = users;
     }
 
-    public Set<Checklist> getChecklists() {
-        return this.checklists;
+    public Set<Todo> getTodos() {
+        return this.todos;
     }
 
-    public void setChecklists(Set<Checklist> checklists) {
-        this.checklists = checklists;
+    public void setTodos(Set<Todo> todos) {
+        this.todos = todos;
     }
+   
 
 }
