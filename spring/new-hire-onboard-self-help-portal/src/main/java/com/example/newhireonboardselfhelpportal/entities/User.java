@@ -1,5 +1,7 @@
 package com.example.newhireonboardselfhelpportal.entities;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -12,7 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * User
@@ -46,10 +48,19 @@ public class User {
     @Column(name = "user_role")
     private String userRole;
 
-    @JsonManagedReference
+    @JsonIgnore
     @OneToMany(mappedBy = "user")
     private Set<UserTodo> userTodos;
 
+    public List<CombinedUserTodo> getCombinedUserTodos() {
+        ArrayList<CombinedUserTodo> combinedUserTodos = new ArrayList<>();
+
+        for (UserTodo userTodo : this.userTodos) {
+            CombinedUserTodo x = new CombinedUserTodo(userTodo);
+            combinedUserTodos.add(x);
+        }
+        return combinedUserTodos;
+    }
 
     public Long getId() {
         return this.id;

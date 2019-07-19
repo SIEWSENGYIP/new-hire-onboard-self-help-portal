@@ -15,6 +15,7 @@ import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
@@ -44,19 +45,22 @@ public class Todo {
     @Column(name = "reference_doc")
     private String reference_doc;
 
-    @JsonManagedReference
+    @JsonIgnore
     @OneToMany(mappedBy = "todo")
     private Set<UserTodo> userTodos;
 
-    @JsonBackReference
-    @ManyToMany(cascade=CascadeType.ALL)
-    @JoinTable(
-        name="team_todos", 
-        joinColumns={@JoinColumn(name="todo_id")}, 
-        inverseJoinColumns={@JoinColumn(name="team_id")}
-    )
-    private Set<Team> teams;
+    @JsonIgnore
+    @OneToMany(mappedBy = "todo")
+    private Set<TeamTodo> teamTodos;
 
+    // @JsonBackReference
+    // @ManyToMany(cascade=CascadeType.ALL)
+    // @JoinTable(
+    //     name="team_todos", 
+    //     joinColumns={@JoinColumn(name="todo_id")}, 
+    //     inverseJoinColumns={@JoinColumn(name="team_id")}
+    // )
+    // private Set<Team> teams;
 
     public Long getId() {
         return this.id;
@@ -114,13 +118,12 @@ public class Todo {
         this.userTodos = userTodos;
     }
 
-    public Set<Team> getTeams() {
-        return this.teams;
+    public Set<TeamTodo> getTeamTodos() {
+        return this.teamTodos;
     }
 
-    public void setTeams(Set<Team> teams) {
-        this.teams = teams;
+    public void setTeamTodos(Set<TeamTodo> teamTodos) {
+        this.teamTodos = teamTodos;
     }
-
 
 }
