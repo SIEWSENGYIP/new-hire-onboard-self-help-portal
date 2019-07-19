@@ -10,20 +10,24 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 /**
- * UserChecklist
+ * UserTodo
  */
-@Entity(name = "user_checklists")
-public class UserChecklist {
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,
+      property = "id")
+@Entity(name = "user_todos")
+public class UserTodo {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
 
     @JsonBackReference
     @ManyToOne
-    @JoinColumn(name="checklist_id")
-    private Checklist checklist;
+    @JoinColumn(name="todo_id")
+    private Todo todo;
 
     @JsonBackReference
     @ManyToOne
@@ -39,6 +43,7 @@ public class UserChecklist {
     @Column(name = "status")
     private boolean status;
 
+
     public Long getId() {
         return this.id;
     }
@@ -47,12 +52,12 @@ public class UserChecklist {
         this.id = id;
     }
 
-    public Checklist getChecklist() {
-        return this.checklist;
+    public Todo getTodo() {
+        return this.todo;
     }
 
-    public void setChecklist(Checklist checklist) {
-        this.checklist = checklist;
+    public void setTodo(Todo todo) {
+        this.todo = todo;
     }
 
     public User getUser() {
@@ -90,5 +95,6 @@ public class UserChecklist {
     public void setStatus(boolean status) {
         this.status = status;
     }
+    
 
 }

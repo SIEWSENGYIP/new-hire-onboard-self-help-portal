@@ -7,20 +7,22 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 /**
- * TeamChecklist
+ * TeamTodo
  */
-@Entity(name = "team_checklists")
-public class TeamChecklist {
+@Entity(name = "team_todos")
+public class TeamTodo {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "checklist_id")
-    private Long checklistId;
+    @Column(name = "todo_id")
+    private Long todoId;
 
     @Column(name = "team_id")
     private Long teamId;
 
+
+    
 
     public Long getId() {
         return this.id;
@@ -30,12 +32,12 @@ public class TeamChecklist {
         this.id = id;
     }
 
-    public Long getChecklistId() {
-        return this.checklistId;
+    public Long getTodoId() {
+        return this.todoId;
     }
 
-    public void setChecklistId(Long checklistId) {
-        this.checklistId = checklistId;
+    public void setTodoId(Long todoId) {
+        this.todoId = todoId;
     }
 
     public Long getTeamId() {
