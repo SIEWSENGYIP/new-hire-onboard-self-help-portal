@@ -1,6 +1,6 @@
 import {Entity, PrimaryGeneratedColumn, Column, OneToMany} from "typeorm";
 import { User } from "./User";
-import { TeamChecklist } from "./TeamChecklist";
+import { TeamTodo } from "./TeamTodo";
 
 @Entity({name: "teams"})
 export class Team {
@@ -14,7 +14,7 @@ export class Team {
     @OneToMany(type => User, user => user.team)
     users: User[]
 
-    @OneToMany(type => TeamChecklist, teamChecklist => teamChecklist.team)
-    teamChecklists: TeamChecklist[]
+    @OneToMany(type => TeamTodo, teamTodo => teamTodo.team)
+    teamTodos: TeamTodo[]
 
 }

@@ -6,6 +6,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 /**
  * UserChecklist
  */
@@ -15,11 +20,15 @@ public class UserChecklist {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "checklist_id")
-    private Long checklistId;
+    @JsonBackReference
+    @ManyToOne
+    @JoinColumn(name="checklist_id")
+    private Checklist checklist;
 
-    @Column(name = "user_id")
-    private Long userId;
+    @JsonBackReference
+    @ManyToOne
+    @JoinColumn(name="user_id")
+    private User user;
 
     @Column(name = "assigned_date")
     private String assignedDate;
@@ -30,7 +39,6 @@ public class UserChecklist {
     @Column(name = "status")
     private boolean status;
 
-
     public Long getId() {
         return this.id;
     }
@@ -39,20 +47,20 @@ public class UserChecklist {
         this.id = id;
     }
 
-    public Long getChecklistId() {
-        return this.checklistId;
+    public Checklist getChecklist() {
+        return this.checklist;
     }
 
-    public void setChecklistId(Long checklistId) {
-        this.checklistId = checklistId;
+    public void setChecklist(Checklist checklist) {
+        this.checklist = checklist;
     }
 
-    public Long getUserId() {
-        return this.userId;
+    public User getUser() {
+        return this.user;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public String getAssignedDate() {

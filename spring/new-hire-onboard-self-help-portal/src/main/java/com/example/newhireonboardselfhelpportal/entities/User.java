@@ -8,8 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -47,9 +47,8 @@ public class User {
     private String userRole;
 
     @JsonManagedReference
-    @ManyToMany(mappedBy = "users")
-    private Set<Checklist> checklists;
-
+    @OneToMany(mappedBy = "user")
+    private Set<UserChecklist> userChecklists;
 
     public Long getId() {
         return this.id;
@@ -115,12 +114,12 @@ public class User {
         this.userRole = userRole;
     }
 
-    public Set<Checklist> getChecklists() {
-        return this.checklists;
+    public Set<UserChecklist> getUserChecklists() {
+        return this.userChecklists;
     }
 
-    public void setChecklists(Set<Checklist> checklists) {
-        this.checklists = checklists;
+    public void setUserChecklists(Set<UserChecklist> userChecklists) {
+        this.userChecklists = userChecklists;
     }
 
 }
