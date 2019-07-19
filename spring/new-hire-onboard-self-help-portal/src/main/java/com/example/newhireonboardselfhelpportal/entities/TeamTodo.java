@@ -5,6 +5,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 /**
  * TeamTodo
@@ -15,14 +19,15 @@ public class TeamTodo {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "todo_id")
-    private Long todoId;
+    @ManyToOne
+    @JoinColumn(name="todo_id")
+    private Todo todo;
 
-    @Column(name = "team_id")
-    private Long teamId;
+    @JsonBackReference
+    @ManyToOne
+    @JoinColumn(name="team_id")
+    private Team team;
 
-
-    
 
     public Long getId() {
         return this.id;
@@ -32,20 +37,20 @@ public class TeamTodo {
         this.id = id;
     }
 
-    public Long getTodoId() {
-        return this.todoId;
+    public Todo getTodo() {
+        return this.todo;
     }
 
-    public void setTodoId(Long todoId) {
-        this.todoId = todoId;
+    public void setTodo(Todo todo) {
+        this.todo = todo;
     }
 
-    public Long getTeamId() {
-        return this.teamId;
+    public Team getTeam() {
+        return this.team;
     }
 
-    public void setTeamId(Long teamId) {
-        this.teamId = teamId;
+    public void setTeam(Team team) {
+        this.team = team;
     }
 
 }

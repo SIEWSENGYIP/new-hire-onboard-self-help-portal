@@ -1,5 +1,7 @@
 package com.example.newhireonboardselfhelpportal.entities;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -10,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 /**
@@ -24,15 +27,27 @@ public class Team {
     @Column(name = "description")
     private String ntName;
 
-    @JsonManagedReference
+    @JsonIgnore
     @OneToMany(mappedBy="team")
     private Set<User> users;
 
-    @JsonManagedReference
-    @ManyToMany(mappedBy = "teams")
-    private Set<Todo> todos;
+    @JsonIgnore
+    @OneToMany(mappedBy = "team")
+    private Set<TeamTodo> teamTodos;
 
+    // @JsonManagedReference
+    // @ManyToMany(mappedBy = "teams")
+    // private Set<Todo> todos;
 
+    public List<CombinedTeamTodo> getCombinedTeamTodos() {
+        ArrayList<CombinedTeamTodo> combinedTeamTodos = new ArrayList<>();
+
+        for (TeamTodo teamTodo : this.teamTodos) {
+            CombinedTeamTodo x = new CombinedTeamTodo(teamTodo);
+            combinedTeamTodos.add(x);
+        }
+        return combinedTeamTodos;
+    }
 
     public Long getId() {
         return this.id;
@@ -58,12 +73,12 @@ public class Team {
         this.users = users;
     }
 
-    public Set<Todo> getTodos() {
-        return this.todos;
+    public Set<TeamTodo> getTeamTodos() {
+        return this.teamTodos;
     }
 
-    public void setTodos(Set<Todo> todos) {
-        this.todos = todos;
+    public void setTeamTodos(Set<TeamTodo> teamTodos) {
+        this.teamTodos = teamTodos;
     }
    
 
