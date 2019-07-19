@@ -24,7 +24,6 @@ public class UserTodo {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
 
-    @JsonBackReference
     @ManyToOne
     @JoinColumn(name="todo_id")
     private Todo todo;

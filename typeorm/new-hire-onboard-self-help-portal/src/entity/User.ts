@@ -20,7 +20,7 @@ export class User {
     @Column({ nullable: true })
     joined_date: string;
 
-    @ManyToOne(type => Team, team => team.users)
+    @ManyToOne(type => Team, team => team.users, {nullable: true})
     @JoinColumn({name: "team_id"})
     team: Team
 
