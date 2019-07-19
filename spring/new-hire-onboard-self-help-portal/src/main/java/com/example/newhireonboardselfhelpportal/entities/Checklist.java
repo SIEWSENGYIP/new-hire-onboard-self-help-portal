@@ -11,8 +11,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 /**
  * Checklist
@@ -38,14 +40,9 @@ public class Checklist {
     @Column(name = "reference_doc")
     private String reference_doc;
 
-    @JsonBackReference
-    @ManyToMany(cascade=CascadeType.ALL)
-    @JoinTable(
-        name="user_checklists", 
-        joinColumns={@JoinColumn(name="checklist_id")}, 
-        inverseJoinColumns={@JoinColumn(name="user_id")}
-    )
-    private Set<User> users;
+    @JsonManagedReference
+    @OneToMany(mappedBy = "checklists")
+    private Set<UserChecklist> userChecklists;
 
     @JsonBackReference
     @ManyToMany(cascade=CascadeType.ALL)
@@ -55,7 +52,6 @@ public class Checklist {
         inverseJoinColumns={@JoinColumn(name="team_id")}
     )
     private Set<Team> teams;
-
 
     public Long getId() {
         return this.id;
@@ -105,12 +101,12 @@ public class Checklist {
         this.reference_doc = reference_doc;
     }
 
-    public Set<User> getUsers() {
-        return this.users;
+    public Set<UserChecklist> getUserChecklists() {
+        return this.userChecklists;
     }
 
-    public void setUsers(Set<User> users) {
-        this.users = users;
+    public void setUserChecklists(Set<UserChecklist> userChecklists) {
+        this.userChecklists = userChecklists;
     }
 
     public Set<Team> getTeams() {
