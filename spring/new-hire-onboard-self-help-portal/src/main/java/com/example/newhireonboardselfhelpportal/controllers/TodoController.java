@@ -33,6 +33,11 @@ public class TodoController {
         return todoRepository.findAll();
     }
 
+    @GetMapping(value="/todos/{id}", produces="application/json")
+    public Todo displayTodo(@PathVariable("id") Long id) {
+        return todoRepository.findById(id).orElse(new Todo());
+    }
+
     @PostMapping(value="/todos/{id}")
     public UserTodo updateUserTodo(@PathVariable("id") Long id) {
         UserTodo existingUserTodo = userTodoRepository.findById(id).orElse(new UserTodo());
