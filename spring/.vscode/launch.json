@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-DemoApplication<new-hire-onboard-self-help-portal>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "com.example.newhireonboardselfhelpportal.DemoApplication",
+            "projectName": "new-hire-onboard-self-help-portal",
+            "args": ""
+        }
+    ]
+}

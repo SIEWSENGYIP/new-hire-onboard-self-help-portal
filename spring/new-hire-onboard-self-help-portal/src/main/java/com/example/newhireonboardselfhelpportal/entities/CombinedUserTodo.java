@@ -12,6 +12,7 @@ public class CombinedUserTodo {
     String referenceDoc;
     String assignedDate;
     String completionDate;
+    Boolean status;
 
     CombinedUserTodo(UserTodo userTodo) {
         this.todoId = userTodo.getTodo().getId();
@@ -22,6 +23,7 @@ public class CombinedUserTodo {
         this.referenceDoc = userTodo.getTodo().getReference_doc();
         this.assignedDate = userTodo.getAssignedDate();
         this.completionDate = userTodo.getCompletedDate();
+        this.status = userTodo.getStatus();
     }
 
     public Long getTodoId() {
@@ -86,6 +88,14 @@ public class CombinedUserTodo {
 
     public void setCompletionDate(String completionDate) {
         this.completionDate = completionDate;
+    }
+
+    public Boolean getStatus() {
+        return this.status;
+    }
+
+    public void setStatus(Boolean status) {
+        this.status = status;
     }
     
 }
