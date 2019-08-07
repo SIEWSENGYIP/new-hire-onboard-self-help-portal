@@ -19,7 +19,7 @@ export class UserTodo {
     @Column()
     assigned_date: string;
 
-    @Column()
+    @Column({ nullable: true })
     completed_date: string;
 
     @Column()
